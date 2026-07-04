@@ -217,7 +217,7 @@ I added a guarded notification block after the rating commit. The app now create
 if song.shared_by != user_id:
     create_notification(
         user_id=song.shared_by,
-        type="song_rated",
+        notification_type="song_rated",
         body=f"{rater.username} rated your song '{song.title}' {score}/5."
     )
 ```
@@ -281,10 +281,10 @@ git log --oneline
 The screenshot shows separate commits for each fix:
 
 ```text
-0deb11f fix: remove unused song_tags join from search
-15fa7b8 fix: notify sharer when song is rated
-37c3bd3 fix: limit listening now feed to recent activity
-fa12c0c fix: include final song in playlist results
+0deb11f fix: remove unnecessary tag join that could duplicate search results
+15fa7b8 fix: notify song's sharer when their song is rated
+37c3bd3 fix: shorten listening-now window to 30 minutes so stale events don't appear
+fa12c0c fix: return all playlist songs instead of dropping the last one and return songs in order
 95e0244 fix: increment streak on consecutive days regardless of weekday
 ```
 
